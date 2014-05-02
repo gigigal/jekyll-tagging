@@ -115,11 +115,11 @@ module Jekyll
       site.permalink_style == :pretty || site.config['tag_permalink_style'] == 'pretty' ? url : url << '.html'
     end
 
-    def tags(obj)
+    def tags(obj, site = Tagger.site)
       tags = obj['tags'].dup
       tags.map! { |t| t.first } if tags.first.is_a?(Array)
       tags.map! { |t| tag_link(t, tag_url(t), :rel => 'tag') if t.is_a?(String) }.compact!
-      tags.join(', ')
+      tags.join(site.config['tag_separator'])
     end
 
     def active_tag_data(site = Tagger.site)
